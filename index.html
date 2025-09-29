@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>aurixei — Portfolio</title>
+  <meta name="description" content="Personal portfolio of aurixei: projects, write‑ups, and contact." />
+  <meta property="og:title" content="aurixei — Portfolio" />
+  <meta property="og:description" content="Personal portfolio of aurixei: projects, write‑ups, and contact." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://aurixei.github.io/" />
+  <meta name="theme-color" content="#0ea5e9" />
+  <style>
+    :root{
+      --bg: #0b0f19;
+      --panel: #0f172a;
+      --ink: #e5e7eb;
+      --muted:#a7b0c0;
+      --brand:#22d3ee;
+      --brand-2:#60a5fa;
+      --ring: rgba(34,211,238,.35);
+    }
+    @media (prefers-color-scheme: light){
+      :root{ --bg:#f8fafc; --panel:#ffffff; --ink:#0b1220; --muted:#556070; --brand:#0ea5e9; --brand-2:#6366f1; --ring: rgba(14,165,233,.25); }
+      body{ background: linear-gradient(160deg,#f3f7ff, #fff 30%); }
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color:var(--ink); background: radial-gradient(1200px 800px at 80% -10%, rgba(96,165,250,.15), transparent 60%),
+                          radial-gradient(900px 600px at -10% 20%, rgba(34,211,238,.15), transparent 50%),
+                          var(--bg);
+    }
+    a{ color:var(--brand); text-decoration:none }
+    a:hover{ text-decoration:underline }
+
+    .container{ width:min(1100px, 92%); margin-inline:auto }
+
+    header{ position:sticky; top:0; backdrop-filter:saturate(120%) blur(6px);
+            background: color-mix(in oklab, var(--bg) 85%, transparent); border-bottom:1px solid color-mix(in oklab, var(--panel) 70%, transparent); z-index:50 }
+    .nav{ display:flex; align-items:center; justify-content:space-between; padding:14px 0 }
+    .brand{ display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:.2px }
+    .logo{ width:28px; height:28px; border-radius:8px; background: conic-gradient(from 180deg at 50% 50%, var(--brand), var(--brand-2), var(--brand)); box-shadow:0 0 0 4px color-mix(in oklab, var(--ring) 50%, transparent) inset }
+    .links{ display:flex; gap:18px }
+    .links a{ color:var(--ink); opacity:.9 }
+
+    .hero{ display:grid; grid-template-columns:1.1fr .9fr; gap:28px; padding:64px 0 28px; align-items:center }
+    .title{ font-size:clamp(28px, 4vw, 42px); line-height:1.15; margin:0 0 10px; font-weight:800 }
+    .subtitle{ color:var(--muted); margin:0 0 22px }
+    .badge{ display:inline-flex; align-items:center; gap:10px; padding:8px 12px; border-radius:999px; border:1px solid color-mix(in oklab, var(--brand) 40%, transparent); background: color-mix(in oklab, var(--panel) 80%, transparent); box-shadow: 0 0 0 4px var(--ring) }
+    .cta{ display:flex; gap:12px; flex-wrap:wrap; margin-top:18px }
+    .btn{ display:inline-flex; align-items:center; gap:10px; padding:10px 14px; border-radius:12px; border:1px solid color-mix(in oklab, var(--panel) 70%, transparent); background:linear-gradient(180deg, color-mix(in oklab, var(--panel) 60%, transparent), color-mix(in oklab, var(--panel) 85%, transparent)); color:var(--ink); font-weight:600 }
+    .btn.primary{ background: linear-gradient(180deg, color-mix(in oklab, var(--brand) 40%, var(--panel)), color-mix(in oklab, var(--brand-2) 40%, var(--panel))); border-color:transparent }
+    .btn:hover{ text-decoration:none; transform:translateY(-1px) }
+
+    section{ padding:40px 0 }
+    h2{ font-size:clamp(22px, 3vw, 28px); margin:0 0 14px }
+    p.lead{ color:var(--muted); max-width:72ch }
+
+    .panel{ background: color-mix(in oklab, var(--panel) 86%, transparent); border:1px solid color-mix(in oklab, var(--panel) 65%, transparent); border-radius:16px; padding:20px }
+
+    .grid{ display:grid; gap:16px; grid-template-columns: repeat(12, 1fr) }
+    .col-6{ grid-column: span 6 }
+    .col-4{ grid-column: span 4 }
+    .card{ display:flex; flex-direction:column; gap:10px; padding:16px; border-radius:14px; background: linear-gradient(180deg, color-mix(in oklab, var(--panel) 70%, transparent), color-mix(in oklab, var(--panel) 92%, transparent)); border:1px solid color-mix(in oklab, var(--panel) 60%, transparent); transition: transform .2s ease, box-shadow .2s ease }
+    .card:hover{ transform: translateY(-4px); box-shadow: 0 10px 24px -12px rgba(0,0,0,.45) }
+    .card h3{ margin:0; font-size:18px }
+    .meta{ color:var(--muted); font-size:14px }
+    .tags{ display:flex; gap:8px; flex-wrap:wrap }
+    .tag{ font-size:12px; padding:4px 8px; border-radius:999px; border:1px dashed color-mix(in oklab, var(--panel) 50%, transparent); color:var(--muted) }
+
+    .about{ display:grid; grid-template-columns: .8fr 1.2fr; gap:18px }
+    .kpi{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px }
+    .kpi .panel{ text-align:center }
+    .kpi strong{ font-size:22px; display:block }
+
+    .contact{ display:flex; gap:14px; flex-wrap:wrap }
+    .icon{ width:18px; height:18px; vertical-align:-3px }
+
+    footer{ border-top:1px solid color-mix(in oklab, var(--panel) 70%, transparent); padding:24px 0 60px; color:var(--muted) }
+
+    @media (max-width: 900px){
+      .hero{ grid-template-columns:1fr; padding-top:34px }
+      .about{ grid-template-columns:1fr }
+      .grid{ grid-template-columns: repeat(6, 1fr) }
+      .col-6{ grid-column: span 6 }
+      .col-4{ grid-column: span 6 }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <span>aurixei</span>
+      </div>
+      <nav class="links" aria-label="Primary">
+        <a href="#projects">Projects</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Hero -->
+    <section class="hero" id="home">
+      <div>
+        <span class="badge">Open to opportunities • Building & breaking things</span>
+        <h1 class="title">Hi, I’m <span style="background: linear-gradient(90deg,var(--brand),var(--brand-2)); -webkit-background-clip:text; color:transparent">aurixei</span> — a security‑minded developer who loves web and reverse engineering.</h1>
+        <p class="subtitle">I ship hands‑on projects, write clear docs, and practice CTFs. Here you’ll find selected work, practical notes, and ways to reach me.</p>
+        <div class="cta">
+          <a class="btn primary" href="#projects">View projects</a>
+          <a class="btn" href="https://github.com/aurixei" target="_blank" rel="noopener">GitHub profile</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects">
+      <h2>Projects</h2>
+      <p class="lead">A mix of security labs, web apps, and utilities. Each card links to code or a write‑up.</p>
+      <div class="grid">
+        <article class="card col-4">
+          <h3><a href="#">FridgeChef — recipe generator</a></h3>
+          <p class="meta">Astro + Netlify | 2025</p>
+          <p>Turns leftovers into recipes with a tiny search index and offline cache.</p>
+          <div class="tags"><span class="tag">Astro</span><span class="tag">Service Worker</span><span class="tag">UX</span></div>
+        </article>
+        <article class="card col-4">
+          <h3><a href="#">Kalkulator Tabungan Mobil</a></h3>
+          <p class="meta">Python CLI | 2024</p>
+          <p>Time‑to‑goal calculator that models inflation and investment returns.</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">Finance</span></div>
+        </article>
+        <article class="card col-4">
+          <h3><a href="#">CTF Write‑ups</a></h3>
+          <p class="meta">HTB & misc</p>
+          <p>Reproducible steps, payloads, and mitigations for selected boxes.</p>
+          <div class="tags"><span class="tag">Web</span><span class="tag">Reversing</span><span class="tag">Binex</span></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="about">
+      <div>
+        <h2>About</h2>
+        <p class="lead">Short bio. What you focus on, what you value, and what you want next. Keep it concrete and friendly.</p>
+        <ul>
+          <li>Undergraduate Cyber Security @ BINUS University.</li>
+          <li>Enjoys Web exploitation, with a side of reversing & binex.</li>
+          <li>Active in CTFs; streams learning sessions and tooling.</li>
+        </ul>
+      </div>
+      <div>
+        <div class="kpi">
+          <div class="panel"><strong>20+</strong><span class="meta">Write‑ups</span></div>
+          <div class="panel"><strong>10</strong><span class="meta">Projects</span></div>
+          <div class="panel"><strong>∞</strong><span class="meta">Curiosity</span></div>
+        </div>
+        <div class="panel" style="margin-top:12px">
+          <h3 style="margin:0 0 6px">Tech I use</h3>
+          <p class="meta">Python, C/C++, PHP (Laravel), JS/TS, Docker, Git, Burp, Ghidra, pwntools</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <h2>Contact</h2>
+      <p class="lead">Best ways to reach me. Replace links with your real profiles.</p>
+      <div class="contact">
+        <a class="btn" href="mailto:you@example.com" aria-label="Email">Email</a>
+        <a class="btn" href="https://github.com/aurixei" target="_blank" rel="noopener" aria-label="GitHub">GitHub</a>
+        <a class="btn" href="https://www.linkedin.com/in/YOUR-LINKEDIN" target="_blank" rel="noopener" aria-label="LinkedIn">LinkedIn</a>
+        <a class="btn" href="#" aria-label="Resume">Download Résumé</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <small>© <span id="y"></span> aurixei. Built with plain HTML/CSS. Hosted on GitHub Pages.</small>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
